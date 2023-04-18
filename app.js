@@ -3,7 +3,9 @@ const bodyParser=require('body-parser')
 const request=require('request')
 const https = require('https');
 const app=express()
+require('dotenv').config(); // 导入 dotenv 模块，用于加载环境变量
 
+const apiKey = process.env.API_KEY
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -27,11 +29,11 @@ app.post('/',(req,res)=>{
         ]
     }
 const jsonData=JSON.stringify(data)
-const url='https://us8.api.mailchimp.com/3.0//lists/59cc099113'
+const url='https://us8.api.mailchimp.com/3.0/lists/59cc099113'
 
 const options={
     method:'POST',
-    auth:"Emily:877073dc464361c0b14c52115a7ae9daus8"
+    auth:apiKey
 }
 
 const request =https.request(url, options,(response)=>{
